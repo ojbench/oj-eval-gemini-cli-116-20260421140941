@@ -86,15 +86,15 @@ struct Snake {
 
         bool eating = map->is_food(next_x, next_y);
 
-        for (size_t i = 0; i < body.size(); ++i) {
-            if (body[i].first == next_x && body[i].second == next_y) {
-                return false;
-            }
-        }
-
         if (!eating) {
+            for (int i = 0; i < (int)body.size() - 1; ++i) {
+                if (body[i].first == next_x && body[i].second == next_y) return false;
+            }
             body.pop_back();
         } else {
+            for (int i = 0; i < (int)body.size(); ++i) {
+                if (body[i].first == next_x && body[i].second == next_y) return false;
+            }
             map->eat_food(next_x, next_y);
         }
 
